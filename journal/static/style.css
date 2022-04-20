@@ -1,0 +1,17 @@
+.selector-for-some-widget {
+    box-sizing: content-box;
+  }
+h2{
+    text-align: center;
+    margin-top: 50px;
+}
+p{
+  text-align: center;
+  font-family: fantasy;
+}
+form{
+  text-align: center;
+}
+input{
+  margin-top: 20px;
+}
