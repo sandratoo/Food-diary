@@ -1,4 +1,3 @@
-from sys import prefix
 from flask import Flask
 
 def create_app():
