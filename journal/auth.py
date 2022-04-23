@@ -1,3 +1,4 @@
+from xmlrpc.client import boolean
 from flask import Blueprint,render_template,request,flash
 
 auth = Blueprint("auth",__name__)
@@ -25,13 +26,14 @@ def signup():
         password2 = request.form.get("password2")
 
         if len(username) < 3:
-            flash("Must be atleast 3 characters!", category="error")
+            flash("Username must be atleast 3 characters!", category="error")
         elif len(email) < 6:
-             flash("Must be atleast 6 characters!", category="error")
+             flash("Email must be atleast 6 characters!", category="error")
         elif password1 != password2:
             flash("Passwords do not match!", category="error")
         else:
-            flash("Account has been created", category="success")
+            flash("Account has been created!", category="success")
+            return render_template("login.html")
 
 
     return render_template("signup.html")
