@@ -1,5 +1,7 @@
-from xmlrpc.client import boolean
-from flask import Blueprint,render_template,request,flash
+from flask import Blueprint,render_template,request,flash,redirect,url_for
+from . import db
+from .models import User
+from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint("auth",__name__)
 
@@ -32,8 +34,11 @@ def signup():
         elif password1 != password2:
             flash("Passwords do not match!", category="error")
         else:
+            new_user = User(username=username, email=email, password=generate_password_hash(password1, method="sha256"))
+            db.session.add(new_user)
+            db.session.commit()
             flash("Account has been created!", category="success")
-            return render_template("login.html")
+            return redirect(url_for("auth.login"))
 
 
     return render_template("signup.html")

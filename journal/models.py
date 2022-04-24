@@ -1,4 +1,3 @@
-import email
 from . import db
 from sqlalchemy.sql import func
 
@@ -12,5 +11,5 @@ class User(db.Model):
 class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.DateTime(timezone=True), default=func.now() )
-    text = db.column(db.String(10000))
-    user_id = db.column(db.Integer, db.ForeignKey("user.id"))
+    notes = db.Column(db.String(10000))
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
