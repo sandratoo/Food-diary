@@ -1,6 +1,6 @@
 from flask import Blueprint,render_template,request,flash,redirect,url_for
-from . import db
 from .models import User
+from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint("auth",__name__)
@@ -11,8 +11,17 @@ def index():
 
 @auth.route("/login", methods=["POST","GET"])
 def login():
-    data = request.form
-    print(data)
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                flash("Successfully logged in!")
+                return redirect(url_for("auth.index"))
+            else:
+                flash("Wrong password!")
+        flash("Email does not exist!")
     return render_template("login.html")
 
 @auth.route("/logout")
@@ -26,8 +35,12 @@ def signup():
         email= request.form.get("email")
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
+        
+        user = User.query.filter_by(email=email).first()
+        if user:
+            flash("Email already exists!")
 
-        if len(username) < 3:
+        elif len(username) < 3:
             flash("Username must be atleast 3 characters!", category="error")
         elif len(email) < 6:
              flash("Email must be atleast 6 characters!", category="error")
