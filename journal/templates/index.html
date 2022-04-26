@@ -8,6 +8,16 @@
 <ul class="list-group list-group-flash" id="notes">
     {% for note in user.notes %}
     <li class="list-group-item"> {{ note.data }} </li>
+    <br/>
+    <span>
+        <form method="GET" action="/delete">
+            <button type="submit"> Delete </button>
+        </form>
+        <form method="GET" action="views/delete">
+            <button type="submit" class="close">Update</button>
+        </form>
+    </span>
+    <br/>
     {% endfor %}
 </ul>
 <div type="container">
