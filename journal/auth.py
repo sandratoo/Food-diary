@@ -51,7 +51,7 @@ def signup():
             new_user = User(username=username, email=email, password=generate_password_hash(password1, method="sha256"))
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
+            login_user(user)
             flash("Account has been created!", category="success")
             return redirect(url_for("auth.login"))
 
