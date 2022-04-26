@@ -1,8 +1,23 @@
 {% extends "base.html" %}
 
-{% block title %}Home Page{% endblock %}
+{% block title %}Your Page{% endblock %}
 
 {% block content %}
-<h2>Welcome {{username}} </h2>
+<h2>Welcome username </h2>
 <p> A safe place to keep a record of your thoughts </p>
+<ul class="list-group list-group-flash" id="notes">
+    {% for note in user.notes %}
+    <li class="list-group-item"> {{ note.data }} </li>
+    {% endfor %}
+</ul>
+<div type="container">
+    <form class="form-group" method="POST">
+        <label for="note" class="form-label">My Thoughts Today</label>
+        <br/>
+        <textarea class="form-control" name="note" id="note" placeholder="What are you thinking today?"></textarea>
+        <br/>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
 {% endblock %}
