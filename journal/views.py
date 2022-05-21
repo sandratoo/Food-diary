@@ -18,7 +18,7 @@ def index():
         new_note = Note(data=note, user_id= current_user.id)
         db.session.add(new_note)
         db.session.commit()
-        flash("Note added sucessfully!")
+        flash("Food log added to sucessfully!")
     return render_template("index.html",user=current_user)
 
 @views.route("/delete", methods=["POST","GET"])

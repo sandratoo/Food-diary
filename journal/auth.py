@@ -15,11 +15,12 @@ def login():
         if user:
             if check_password_hash(user.password, password):
                 flash("Successfully logged in!")
-                login_user(user)
+                login_user(user, remember=True)
                 return redirect(url_for("views.index"))
             else:
                 flash("Wrong password!")
         flash("Email does not exist. Sign up first.")
+        return render_template
     return render_template("login.html")
 
 @auth.route("/logout")
@@ -51,7 +52,7 @@ def signup():
             new_user = User(username=username, email=email, password=generate_password_hash(password1, method="sha256"))
             db.session.add(new_user)
             db.session.commit()
-            login_user(user)
+            login_user(new_user)
             flash("Account has been created!", category="success")
             return redirect(url_for("auth.login"))
 

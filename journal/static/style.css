@@ -5,10 +5,6 @@ h2{
     text-align: center;
     margin-top: 50px;
 }
-p{
-  text-align: center;
-  font-family: fantasy;
-}
 form{
   text-align: center;
 }
@@ -17,4 +13,12 @@ input{
 }
 button{
   margin-top: 10px;
+}
+footer{
+  text-align: center;
+  margin-top: 180px;
+  position: sticky;
+}
+.container{
+  min-height: 100%;
 }
