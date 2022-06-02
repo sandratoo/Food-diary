@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2> Log in what you ate today </h2>
-<ul class="list-group list-group-flash" id="notes">
+<ul class="list-group list-group-flash" id="notes" name="noted">
     {% for note in user.notes %}
     <form action="POST">
         <label for today> Date:</label>
@@ -13,7 +13,7 @@
     <li class="list-group-item"> {{ note.data }} </li>
     <br/>
     <span>
-        <form method="GET" action="/delete">
+        <form method="POST" action="/delete">
             <button type="submit" class="btn btn-primary"> Delete </button>
         </form>
     </span>

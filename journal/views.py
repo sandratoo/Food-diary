@@ -26,4 +26,5 @@ def delete():
     delete_note = Note.query.filter_by(id=Note.id).first()
     db.session.delete(delete_note)
     db.session.commit()
+    flash("Log has been deleted")
     return redirect(url_for("views.index"))

@@ -22,3 +22,9 @@ footer{
 .container{
   min-height: 100%;
 }
+body{
+  background-color: aquamarine;
+}
+nav{
+  background-color: aqua;
+}
