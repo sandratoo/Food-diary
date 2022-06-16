@@ -16,11 +16,12 @@ def login():
             if check_password_hash(user.password, password):
                 flash("Successfully logged in!")
                 login_user(user, remember=True)
+                logged_in = True
                 return redirect(url_for("views.index"))
             else:
                 flash("Wrong password!")
-        flash("Email does not exist. Sign up first.")
-        return render_template
+        else:
+            flash("Email does not exist. Sign up first.")
     return render_template("login.html")
 
 @auth.route("/logout")
@@ -43,17 +44,17 @@ def signup():
             flash("Email already exists!")
 
         elif len(username) < 3:
-            flash("Username must be atleast 3 characters!", category="error")
+            flash("Username must be atleast 3 characters!")
         elif len(email) < 6:
-             flash("Email must be atleast 6 characters!", category="error")
+             flash("Email must be atleast 6 characters!")
         elif password1 != password2:
-            flash("Passwords do not match!", category="error")
+            flash("Passwords do not match!")
         else:
             new_user = User(username=username, email=email, password=generate_password_hash(password1, method="sha256"))
             db.session.add(new_user)
             db.session.commit()
-            login_user(new_user)
-            flash("Account has been created!", category="success")
+            login_user(new_user, remember=True)
+            flash("Account has been created!")
             return redirect(url_for("auth.login"))
 
 

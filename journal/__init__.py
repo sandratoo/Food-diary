@@ -6,6 +6,7 @@ from flask_login import LoginManager
 db = SQLAlchemy()
 db_name = "database.db"
 
+Logged_in = False
 
 def create_app():
     app = Flask(__name__)
